@@ -1,5 +1,5 @@
 import mcpi.minecraft as minecraft
-import mcpi.block as block
+import mcpi.block as Block
 import math
 
 def Convert(x1, y1, z1, x2, y2, z2):
@@ -15,27 +15,60 @@ def Convert(x1, y1, z1, x2, y2, z2):
 
     array = []
  
-    # blocks = []
     for x in range(xhigh - xlow + 1):
-        # blocks.append([])
         for y in range(yhigh - ylow + 1):
-            # blocks[x].append([])
             for z in range(zhigh - zlow + 1):
-                # blocks[x][y].append([])
-                block = mc.getBlock(xlow + x, ylow + y, zlow + z)        
-                print(xlow + x, ylow + y, zlow + z, block)
+                blockType = mc.getBlockWithData(xlow + x, ylow + y, zlow + z)  
+                print(xlow + x, ylow + y, zlow + z, blockType)
+                block = 5
+
+                # http://www.stuffaboutcode.com/p/minecraft-api-reference.html 
+                if blockType == Block.Block(3, 0):
+                    block = 1
+                elif blockType == Block.Block(17, 0):
+                    block = 2
+                elif blockType == Block.Block(35, 14):
+                    block = 4
+                elif blockType == Block.Block(35, 11):
+                    block = 5
+                elif blockType == Block.Block(57, 0):
+                    block = 6
+                elif blockType == Block.Block(45, 0):
+                    block = 7
+                elif blockType == Block.Block(5, 0):
+                    block = 8
+                elif blockType == Block.Block(1, 0):
+                    block = 9
+                elif blockType == Block.Block(17, 2):
+                    block = 12   
+                elif blockType == Block.Block(80, 7):
+                    block = 15  
+                elif blockType == Block.Block(79, 0):
+                    block = 16  
+                elif blockType == Block.Block(35, 4):
+                    block = 17
+                elif blockType == Block.AIR:
+                    block = 0
+
                 array.append(block)
-                rawTextData = str(xlow + x) + "," + str(ylow + y) + "," + str(zlow + z) + "," + str(block) + "\n"
-                # blocks[x][y][z] = block
 
 
     tempX = xhigh - xlow
     tempY = yhigh - ylow
     tempZ = xhigh - xlow
 
+    array.reverse()
 
-
-    textData = "var map = " + str(array) + ";\n" + "var i = 0\n" + "\n" + "for(x = 0; x < " + str(tempX + 1) + "; x++) {\n" + "  for(y = 0; y < " + str(tempY + 1) + "; y++) {\n" + "    for(z = 0; z < " + str(tempZ + 1) + "; z++) {\n" +  "      cube(x+5, z+5, y+5, map[i]);\n" + "      i++;\n" + "    }\n" + "  }\n" + "}\n"
+    textData  = "var map = " + str(array) + ";\n"
+    textData += "var i = 0\n"
+    textData += "\n"
+    textData += "for(x = 0; x < " + str(tempX + 1) + "; x++) {\n"
+    textData += "  for(y = 0; y < " + str(tempY + 1) + "; y++) {\n"
+    textData += "    for(z = 0; z < " + str(tempZ + 1) + "; z++) {\n"
+    textData += "      cube(x, z, y, map[i]);\n" + "      i++;\n"
+    textData += "    }\n"
+    textData += "  }\n"
+    textData += "}\n"
 
     file.write(textData)
     file.close()
