@@ -23,12 +23,10 @@ class Commands(cmd.Cmd):
 
     def do_setPos1(self, args):
         self.startPos = self.mc.player.getTilePos()
-        # self.startPos = minecraft.Vec3(681, 4, 79)
         print(str(self.startPos))
         
     def do_setPos2(self, args):
         self.endPos = self.mc.player.getTilePos()
-        # self.endPos = minecraft.Vec3(679, 4, 81)
         print(str(self.endPos))
                      
 

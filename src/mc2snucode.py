@@ -4,7 +4,6 @@ import math
 
 def Convert(x1, y1, z1, x2, y2, z2):
     mc = minecraft.Minecraft.create()
-    file = open("convert.txt", 'w')
 
     xhigh = max(x1, x2)
     xlow = min(x1, x2)
@@ -70,6 +69,5 @@ def Convert(x1, y1, z1, x2, y2, z2):
     textData += "  }\n"
     textData += "}\n"
 
-    file.write(textData)
-    file.close()
-    # return blocks
+    with open("convert.txt", 'wt') as file:
+        file.write(textData)
