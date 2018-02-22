@@ -1,6 +1,7 @@
 import mcpi.minecraft as minecraft
 import mcpi.block as Block
 import math
+import os
 
 def Convert(x1, y1, z1, x2, y2, z2):
     mc = minecraft.Minecraft.create()
@@ -69,5 +70,9 @@ def Convert(x1, y1, z1, x2, y2, z2):
     textData += "  }\n"
     textData += "}\n"
 
-    with open("convert.txt", 'wt') as file:
+    curDir = os.path.dirname(os.path.realpath(__file__))
+    fullDir = curDir + '\output'
+    if not os.path.isdir(fullDir):
+        os.mkdir(fullDir)
+    with open(curDir + "\output\convert.txt", 'wt') as file:
         file.write(textData)
